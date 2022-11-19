@@ -39,6 +39,7 @@ function FormCreate() {
                       autocomplete="given-name"
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       onChange={(e) => setName(e.target.value)}
+                      required
                     />
                   </div>
 
@@ -56,6 +57,7 @@ function FormCreate() {
                       autocomplete="email"
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       onChange={(e) => setPhone(e.target.value)}
+                      required
                     />
                   </div>
 
@@ -72,6 +74,7 @@ function FormCreate() {
                       autocomplete="country"
                       className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       onChange={(e) => setSelectedDistrict(e.target.value)}
+                      required
                     >
                       <option>Quận 1</option>
                     </select>
@@ -91,6 +94,7 @@ function FormCreate() {
                       autocomplete="street-address"
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       onChange={(e) => setStreet(e.target.value)}
+                      required
                     />
                   </div>
 
@@ -109,6 +113,7 @@ function FormCreate() {
                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       placeholder="20m2"
                       onChange={(e) => setArea(e.target.value)}
+                      required
                     />
                   </div>
 
@@ -127,6 +132,7 @@ function FormCreate() {
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       placeholder="1000000"
                       onChange={(e) => setPrice(e.target.value)}
+                      required
                     />
                   </div>
                 </div>
