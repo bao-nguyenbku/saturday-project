@@ -13,36 +13,12 @@ function FormCreate() {
 
   const [districts, setDistricts] = useState([]);
 
-  // const handleSubmit = (e) => {
-  //     console.log(name)
-  //     console.log(phone)
-  //     console.log(selectedDistrict)
-  //     console.log(street)
-  //     console.log(area)
-  //     console.log(price)
-  //     console.log(description)
-
-  // }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-
-    // let formData = new FormData();
-    // formData.append("name", name);
-    // formData.append("phone", phone);
-    // formData.append("district", selectedDistrict);
-    // formData.append("street", street);
-    // formData.append("area", area);
-    // formData.append("price", price);
-    // formData.append("description", description);
     const data = JSON.stringify({
 
     })
-    // formData.append("picture", picture);
-    // for (var pair of formData.entries()) {
-    //   console.log(pair[0] + ", " + pair[1]);
-    // }
     await createAccomadation(data)
   };
 
