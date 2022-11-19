@@ -10,14 +10,15 @@ const SearchBar = ({ topic, onSearch }) => {
         fullWidth
         id="filled-basic"
         label={topic.name}
-        variant="filled"
+        variant="outlined"
+        className="bg-slate-100 rounded-lg"
         value={value}
         onChange={(event) => {
           setValue(event.target.value);
         }}
       />
       <Button
-        variant="outlined"
+        variant="contained"
         onClick={
           onSearch
             ? (e) => {

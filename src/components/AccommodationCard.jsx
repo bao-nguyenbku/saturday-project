@@ -13,118 +13,37 @@ import ShareIcon from "@mui/icons-material/Share";
 import { experimentalStyled as styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(2),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
-const options = [
-  'Edit',
-  'Delete',
-];
-
-const ITEM_HEIGHT = 48;
+import { IoLocation, IoTrash, IoPencil } from 'react-icons/io5';
+import styles from './styles.module.css';
+import { formatCurrency } from '../utils/utils';
 
 export default function AccommodationCard(props) {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  const { data } = props;
 
   const hostInfo = `${props.data.chuNha.ten} - ${props.data.chuNha.soDienThoai}`;
   
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      {/* <CardHeader
-        action={
-          <IconButton aria-label="settings" className='p-0'>
-            <MoreVertIcon />
-          </IconButton>
-        }
-        title={props.data.ten}
-        subheader={hostInfo}
-      /> */}
-      <CardContent>
-        <Typography variant="h5" color="text.secondary">
-          {props.data.ten}
-            <IconButton
-              aria-label="more"
-              id="long-button"
-              aria-controls={open ? 'long-menu' : undefined}
-              aria-expanded={open ? 'true' : undefined}
-              aria-haspopup="true"
-              onClick={handleClick}
-            >
-              <MoreVertIcon />
-            </IconButton>
-            <Menu
-              id="long-menu"
-              MenuListProps={{
-                'aria-labelledby': 'long-button',
-              }}
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              PaperProps={{
-                style: {
-                  maxHeight: ITEM_HEIGHT * 4.5,
-                  width: '20ch',
-                },
-              }}
-            >
-              {options.map((option) => (
-                <MenuItem key={option} selected={option === 'Pyxis'} onClick={handleClose}>
-                  {option}
-                </MenuItem>
-              ))}
-            </Menu>
-        </Typography>
-        <Typography variant="body1" color="text.secondary">
-          {hostInfo}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Giá: {props.data.gia} VNĐ
-        </Typography>
-      </CardContent>
-      <CardMedia
-        component="img"
-        height="194"
-        image={props.data.hinhAnh}
-      />
-
-      <CardHeader title={props.data.ten} subheader={props.data.chuNha.ten} />
-      <CardMedia component="img" height="194" image={props.data.hinhAnh} />
-      <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          Địa chỉ: {props.data.soNha}, {props.data.tenDuong}, {props.data.quan}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Diện tích: {props.data.dienTich} m2
-        </Typography>
-      </CardContent>
-      <Grid container spacing={2}>
-        <Grid item xs={6}>
-          <Item>
-            <IconButton aria-label="add to favorites">
-              <FavoriteIcon />
-            </IconButton>
-          </Item>
-        </Grid>
-        <Grid item xs={6}>
-          <Item>
-            <IconButton aria-label="share">
-              <ShareIcon />
-            </IconButton>
-          </Item>
-        </Grid>
-      </Grid>
-    </Card>
+    <div className="max-w-sm bg-slate-100 rounded-xl hover:shadow-lg transition-shadow duration-500 cursor-pointer">
+      <div className={styles.inner}>
+        <img src={data.hinhAnh} alt="anh-dai-dien" className="rounded-t-xl"/>
+        <div className="flex absolute top-3 right-3 gap-1">
+          <span className="bg-zinc-800/70 p-2 rounded-full">
+            <IoPencil className="text-white" size={25}/>
+          </span>
+          <span className="bg-zinc-800/70 p-2 rounded-full">
+            <IoTrash className="text-white" size={25}/>
+          </span>
+        </div>
+      </div>
+      <div className="p-3 flex flex-col gap-3">
+        <p className="text-3xl font-bold">{data.ten}</p>
+        <span className="flex items-center text-xl text-gray-500">
+          <IoLocation />
+          <p>{[data.soNha, data.tenDuong, data.quan].join(', ')}</p>
+        </span>
+        <p className="text-sky-700 text-xl font-bold mt-2">{formatCurrency.format(data.gia)} / tháng</p>
+      </div>
+    </div>
+      
   );
 }

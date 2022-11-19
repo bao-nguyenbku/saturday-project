@@ -131,7 +131,7 @@ const SearchPage = () => {
       <SearchBar
         topic={{
           label: "accomodation",
-          name: "Chỗ ở",
+          name: "Tìm kiếm",
         }}
         onSearch={handleSearch}
       />
