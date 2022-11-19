@@ -14,6 +14,7 @@ const mockData = [
       tenDuong: 'ABC',
       quan: 'XYZ',
       chuNhaId: 1,
+      gia: 123456789,
       dienTich: 50000,
       hinhAnh: 'https://akisa.vn/uploads/plugin/product_items/13551/mau-biet-thu-nha-dep-2-tang-hien-dai-bt21377-v2.jpg',
       chuNha: {
@@ -29,6 +30,7 @@ const mockData = [
       tenDuong: 'ABC',
       quan: 'XYZ',
       chuNhaId: 1,
+      gia: 123456789,
       dienTich: 50000,
       hinhAnh: 'https://akisa.vn/uploads/plugin/product_items/13551/mau-biet-thu-nha-dep-2-tang-hien-dai-bt21377-v2.jpg',
       chuNha: {
@@ -44,6 +46,7 @@ const mockData = [
       tenDuong: 'ABC',
       quan: 'XYZ',
       chuNhaId: 1,
+      gia: 123456789,
       dienTich: 50000,
       hinhAnh: 'https://akisa.vn/uploads/plugin/product_items/13551/mau-biet-thu-nha-dep-2-tang-hien-dai-bt21377-v2.jpg',
       chuNha: {
@@ -59,6 +62,7 @@ const mockData = [
       tenDuong: 'ABC',
       quan: 'XYZ',
       chuNhaId: 1,
+      gia: 123456789,
       dienTich: 50000,
       hinhAnh: 'https://akisa.vn/uploads/plugin/product_items/13551/mau-biet-thu-nha-dep-2-tang-hien-dai-bt21377-v2.jpg',
       chuNha: {
@@ -74,6 +78,7 @@ const mockData = [
       tenDuong: 'ABC',
       quan: 'XYZ',
       chuNhaId: 1,
+      gia: 123456789,
       dienTich: 50000,
       hinhAnh: 'https://akisa.vn/uploads/plugin/product_items/13551/mau-biet-thu-nha-dep-2-tang-hien-dai-bt21377-v2.jpg',
       chuNha: {
