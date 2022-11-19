@@ -8,6 +8,12 @@ const getAllAccommodation = () =>{
   return axios.get('/cho-o/get-all');
 }
 
+const postUpdateAccommodation = (p) => {
+  console.log(p)
+  return axios.put('/cho-o', p);
+}
+
+export { getExampleService, getAllAccommodation ,postUpdateAccommodation};
 const createAccomadation = (data) => {
   console.log(data)
   return axios.post('/cho-o/create', data);
