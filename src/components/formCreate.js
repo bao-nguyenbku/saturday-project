@@ -1,11 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 function FormCreate() {
+  const [districts, setDistricts] = useState([]);
+  const handleSubmit = async () => {
+    
+  }
+
+
   return (
     <div className="form">
       <div className="md:grid md:grid-cols-3 md:gap-6">
         <div className="mt-5 md:mt-0 md:col-span-2">
-          <form action="#" method="POST">
+          <form action="#" method="POST" onSubmit={handleSubmit}>
             <div className="shadow sm:rounded-md sm:overflow-hidden">
               <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
                 <div className="grid grid-cols-6 gap-6">
@@ -54,9 +61,11 @@ function FormCreate() {
                       autocomplete="country"
                       className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     >
-                      <option>United States</option>
-                      <option>Canada</option>
-                      <option>Mexico</option>
+                      {districts.map((district, index) => (
+                        <option key={index} value={district.name}>
+                          {district.name}
+                        </option>
+                      ))}
                     </select>
                   </div>
 
@@ -109,7 +118,6 @@ function FormCreate() {
                       placeholder="1000000"
                     />
                   </div>
-
                 </div>
 
                 <div>
