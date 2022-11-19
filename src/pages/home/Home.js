@@ -1,7 +1,8 @@
 import React from "react";
+import AccommodationGridView from "../../components/AccommodationGridView";
 
 const Home = () => {
-  return <div>Home</div>;
+  return <AccommodationGridView/>;
 };
 
 export default Home;
