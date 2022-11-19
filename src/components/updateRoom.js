@@ -1,6 +1,17 @@
-
+import { useState, useEffect, useRef } from "react";
 
 function Update() {
+    const [name, setName] = useState("")
+    const [phone, setPhone] = useState("")
+    const [district, setDistrict] = useState("")
+    const [address, setAddress] = useState("")
+    const [area, setArea] = useState("")
+    const [price, setPrice] = useState("")
+    const [detail, setDetail] = useState("")
+    const handleUpdateSubmit = () =>{
+
+    }
+
   return (
     <div className="form">
       <div className="md:grid md:grid-cols-3 md:gap-6">
@@ -22,6 +33,8 @@ function Update() {
                       id="first_name"
                       autocomplete="given-name"
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
                     />
                   </div>
 
@@ -38,6 +51,8 @@ function Update() {
                       id="email_address"
                       autocomplete="email"
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
                     />
                   </div>
 
@@ -49,34 +64,36 @@ function Update() {
                       Quận
                     </label>
                     <select
-                      id="district"
-                      name="district"
-                      autocomplete="district"
-                      className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        id="district"
+                        name="district"
+                        autocomplete="district"
+                        className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        value={district}
+                        onChange={(e) => setDistrict(e.target.value)}
                     >
-                      <option>Quận 1</option>
-                      <option>Quận 2</option>
-                      <option>Quận 3</option>
-                      <option>Quận 4</option>
-                      <option>Quận 5</option>
-                      <option>Quận 6</option>
-                      <option>Quận 7</option>
-                      <option>Quận 8</option>
-                      <option>Quận 9</option>
-                      <option>Quận 10</option>
-                      <option>Quận 11</option>
-                      <option>Quận 12</option>
-                      <option>Quận Tân Bình</option>
-                      <option>Quận Tân Phú</option>
-                      <option>Quận Phú Nhuận</option>
-                      <option>Quận Bình Thạnh</option>
-                      <option>Quận Gò Vấp</option>
-                      <option>Quận Thủ Đức</option>
-                      <option>Quận Bình Tân</option>
-                      <option>Quận Hóc Môn</option>
-                      <option>Quận Bình Chánh</option>
-                      <option>Quận Nhà Bè</option>
-                      <option>Quận Củ Chi</option>
+                      <option >Quận 1</option>
+                      <option >Quận 2</option>
+                      <option >Quận 3</option>
+                      <option >Quận 4</option>
+                      <option >Quận 5</option>
+                      <option >Quận 6</option>
+                      <option >Quận 7</option>
+                      <option >Quận 8</option>
+                      <option >Quận 9</option>
+                      <option >Quận 10</option>
+                      <option >Quận 11</option>
+                      <option >Quận 12</option>
+                      <option >Quận Tân Bình</option>
+                      <option >Quận Tân Phú</option>
+                      <option >Quận Phú Nhuận</option>
+                      <option >Quận Bình Thạnh</option>
+                      <option >Quận Gò Vấp</option>
+                      <option >Quận Thủ Đức</option>
+                      <option >Quận Bình Tân</option>
+                      <option >Quận Hóc Môn</option>
+                      <option >Quận Bình Chánh</option>
+                      <option >Quận Nhà Bè</option>
+                      <option >Quận Củ Chi</option>
                     </select>
                   </div>
 
@@ -93,6 +110,8 @@ function Update() {
                       id="street_address"
                       autocomplete="street-address"
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      value={address}
+                      onChange={(e) => setAddress(e.target.value)}
                     />
                   </div>
 
@@ -110,6 +129,8 @@ function Update() {
                       autocomplete="m2"
                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       placeholder="50m2"
+                      value={area}
+                      onChange={(e) => setArea(e.target.value)}
                     />
                   </div>
 
@@ -127,6 +148,8 @@ function Update() {
                       autocomplete="email"
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       placeholder="1000000VND"
+                      value={price}
+                      onChange={(e) => setPrice(e.target.value)}
                     />
                   </div>
 
@@ -146,6 +169,8 @@ function Update() {
                       rows="3"
                       className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md"
                       placeholder=""
+                      value={detail}
+                      onChange={(e) => setDetail(e.target.value)}
                     ></textarea>
                   </div>
                   <p className="mt-2 text-sm text-gray-500">
@@ -197,8 +222,9 @@ function Update() {
               </div>
               <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
                 <button
-                  type="submit"
-                  className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                type="submit"
+                className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                onClick={handleUpdateSubmit}
                 >
                   Sửa
                 </button>
