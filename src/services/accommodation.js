@@ -14,3 +14,9 @@ const postUpdateAccommodation = (p) => {
 }
 
 export { getExampleService, getAllAccommodation ,postUpdateAccommodation};
+const createAccomadation = (data) => {
+  console.log(data)
+  return axios.post('/cho-o/create', data);
+}
+
+export { getExampleService, getAllAccommodation, createAccomadation };

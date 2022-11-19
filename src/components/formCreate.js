@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import axios from "../utils/request";
+import { createAccomadation } from "../services/accommodation";
 
 function FormCreate() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [selectedDistrict, setSelectedDistrict] = useState("");
+  const [selectedDistrict, setSelectedDistrict] = useState("quận 1");
   const [street, setStreet] = useState("");
   const [area, setArea] = useState("");
   const [price, setPrice] = useState("");
@@ -12,16 +12,28 @@ function FormCreate() {
   const [picture, setPicture] = useState(null);
 
   const [districts, setDistricts] = useState([]);
-  const handleSubmit = () => {
 
-  }
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = JSON.stringify({
+      name: name,
+      phone: phone,
+      district: selectedDistrict,
+      street: street,
+      area: area,
+      price: price,
+      description: description,
+      picture: picture,
+    })
+    await createAccomadation(data)
+  };
 
   return (
     <div className="form">
       <div className="md:grid md:grid-cols-3 md:gap-6">
         <div className="mt-5 md:mt-0 md:col-span-2">
-          <form action="#" method="POST" onSubmit={handleSubmit}>
+          <form action="#" id="create" onSubmit={handleSubmit}>
             <div className="shadow sm:rounded-md sm:overflow-hidden">
               <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
                 <div className="grid grid-cols-6 gap-6">
@@ -36,7 +48,6 @@ function FormCreate() {
                       type="text"
                       name="first_name"
                       id="first_name"
-                      autocomplete="given-name"
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       onChange={(e) => setName(e.target.value)}
                       required
@@ -51,10 +62,9 @@ function FormCreate() {
                       Số điện thoại
                     </label>
                     <input
-                      type="text"
-                      name="email_address"
-                      id="email_address"
-                      autocomplete="email"
+                      type="tel"
+                      name="phone"
+                      id="phone"
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       onChange={(e) => setPhone(e.target.value)}
                       required
@@ -69,14 +79,18 @@ function FormCreate() {
                       Quận
                     </label>
                     <select
-                      id="country"
-                      name="country"
-                      autocomplete="country"
+                      id="district"
+                      name="district"
                       className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                      onChange={(e) => setSelectedDistrict(e.target.value)}
+                      onSelect={(e) => {
+                        setSelectedDistrict(e.target.value);
+                        console.log("quận: ", e.target.value);
+                      }}
+                      defaultValue="quận 1"
                       required
                     >
                       <option value="quận 1">Quận 1</option>
+                      <option value="quận 2">Quận 2</option>
                     </select>
                   </div>
 
@@ -91,9 +105,8 @@ function FormCreate() {
                       type="text"
                       name="street_address"
                       id="street_address"
-                      autocomplete="street-address"
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                      onChange={(e) => setStreet(e.target.value)}
+                      onSelect={(e) => setStreet(e.target.value)}
                       required
                     />
                   </div>
@@ -109,7 +122,6 @@ function FormCreate() {
                       type="text"
                       name="area"
                       id="area"
-                      autocomplete="m2"
                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       placeholder="20m2"
                       onChange={(e) => setArea(e.target.value)}
@@ -128,7 +140,6 @@ function FormCreate() {
                       type="text"
                       name="price"
                       id="price"
-                      autocomplete="email"
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       placeholder="1000000"
                       onChange={(e) => setPrice(e.target.value)}
@@ -190,7 +201,10 @@ function FormCreate() {
                             name="file-upload"
                             type="file"
                             className="sr-only"
-                            onChange={(e) => {setPicture(e.target.files[0]); console.log(e.target.files[0])}}
+                            onChange={(e) => {
+                              setPicture(e.target.files[0]);
+                              console.log(e.target.files[0]);
+                            }}
                           />
                         </label>
                         <p className="pl-1">or drag and drop</p>
@@ -210,7 +224,7 @@ function FormCreate() {
                   Tạo
                 </button>
               </div>
-            </div> 
+            </div>
           </form>
         </div>
       </div>
