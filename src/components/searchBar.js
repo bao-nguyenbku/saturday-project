@@ -5,8 +5,9 @@ import { FaSearch } from "react-icons/fa";
 const SearchBar = ({ topic, onSearch }) => {
   const [value, setValue] = useState("");
   return (
-    <div>
+    <div className="flex gap-2">
       <TextField
+        fullWidth
         id="filled-basic"
         label={topic.name}
         variant="filled"
@@ -15,7 +16,16 @@ const SearchBar = ({ topic, onSearch }) => {
           setValue(event.target.value);
         }}
       />
-      <Button variant="outlined">
+      <Button
+        variant="outlined"
+        onClick={
+          onSearch
+            ? onSearch
+            : (e) => {
+                e.preventDefault();
+              }
+        }
+      >
         <FaSearch size={40} />
       </Button>
     </div>
