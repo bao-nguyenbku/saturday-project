@@ -1,11 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "../utils/request";
 
 function FormCreate() {
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [selectedDistrict, setSelectedDistrict] = useState("");
+  const [street, setStreet] = useState("");
+  const [area, setArea] = useState("");
+  const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
+  const [picture, setPicture] = useState(null);
+
+  const [districts, setDistricts] = useState([]);
+  const handleSubmit = () => {
+
+  }
+
+
   return (
     <div className="form">
       <div className="md:grid md:grid-cols-3 md:gap-6">
         <div className="mt-5 md:mt-0 md:col-span-2">
-          <form action="#" method="POST">
+          <form action="#" method="POST" onSubmit={handleSubmit}>
             <div className="shadow sm:rounded-md sm:overflow-hidden">
               <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
                 <div className="grid grid-cols-6 gap-6">
@@ -22,6 +38,8 @@ function FormCreate() {
                       id="first_name"
                       autocomplete="given-name"
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      onChange={(e) => setName(e.target.value)}
+                      required
                     />
                   </div>
 
@@ -38,6 +56,8 @@ function FormCreate() {
                       id="email_address"
                       autocomplete="email"
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      onChange={(e) => setPhone(e.target.value)}
+                      required
                     />
                   </div>
 
@@ -53,10 +73,10 @@ function FormCreate() {
                       name="country"
                       autocomplete="country"
                       className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      onChange={(e) => setSelectedDistrict(e.target.value)}
+                      required
                     >
-                      <option>United States</option>
-                      <option>Canada</option>
-                      <option>Mexico</option>
+                      <option>Quận 1</option>
                     </select>
                   </div>
 
@@ -73,6 +93,8 @@ function FormCreate() {
                       id="street_address"
                       autocomplete="street-address"
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      onChange={(e) => setStreet(e.target.value)}
+                      required
                     />
                   </div>
 
@@ -90,6 +112,8 @@ function FormCreate() {
                       autocomplete="m2"
                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       placeholder="20m2"
+                      onChange={(e) => setArea(e.target.value)}
+                      required
                     />
                   </div>
 
@@ -107,9 +131,10 @@ function FormCreate() {
                       autocomplete="email"
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       placeholder="1000000"
+                      onChange={(e) => setPrice(e.target.value)}
+                      required
                     />
                   </div>
-
                 </div>
 
                 <div>
@@ -126,6 +151,7 @@ function FormCreate() {
                       rows="3"
                       className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md"
                       placeholder="you@example.com"
+                      onChange={(e) => setDescription(e.target.value)}
                     ></textarea>
                   </div>
                   <p className="mt-2 text-sm text-gray-500">
@@ -164,6 +190,7 @@ function FormCreate() {
                             name="file-upload"
                             type="file"
                             className="sr-only"
+                            onChange={(e) => setPicture(e.target.files[0])}
                           />
                         </label>
                         <p className="pl-1">or drag and drop</p>
@@ -183,7 +210,7 @@ function FormCreate() {
                   Tạo
                 </button>
               </div>
-            </div>
+            </div> 
           </form>
         </div>
       </div>
