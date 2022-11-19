@@ -8,4 +8,8 @@ const getAllAccommodation = () =>{
   return axios.get('/cho-o/get-all');
 }
 
-export { getExampleService, getAllAccommodation };
+const createAccomadation = (data) => {
+  return axios.post('/cho-o/create', data);
+}
+
+export { getExampleService, getAllAccommodation, createAccomadation };

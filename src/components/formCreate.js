@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "../utils/request";
+import {createAccomadation} from "../services/accommodation";
 
 function FormCreate() {
   const [name, setName] = useState("");
@@ -13,7 +14,13 @@ function FormCreate() {
 
   const [districts, setDistricts] = useState([]);
   const handleSubmit = () => {
-
+      console.log(name)
+      console.log(phone)
+      console.log(selectedDistrict)
+      console.log(street)
+      console.log(area)
+      console.log(price)
+      console.log(description)
   }
 
 
@@ -51,10 +58,10 @@ function FormCreate() {
                       Số điện thoại
                     </label>
                     <input
-                      type="text"
-                      name="email_address"
-                      id="email_address"
-                      autocomplete="email"
+                      type="tel"
+                      name="phone"
+                      id="phone"
+                      autocomplete="tel"
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       onChange={(e) => setPhone(e.target.value)}
                       required
@@ -69,9 +76,9 @@ function FormCreate() {
                       Quận
                     </label>
                     <select
-                      id="country"
-                      name="country"
-                      autocomplete="country"
+                      id="district"
+                      name="district"
+                      autocomplete="text"
                       className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       onChange={(e) => setSelectedDistrict(e.target.value)}
                       required
@@ -109,7 +116,7 @@ function FormCreate() {
                       type="text"
                       name="area"
                       id="area"
-                      autocomplete="m2"
+                      autocomplete="text"
                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       placeholder="20m2"
                       onChange={(e) => setArea(e.target.value)}
@@ -128,7 +135,7 @@ function FormCreate() {
                       type="text"
                       name="price"
                       id="price"
-                      autocomplete="email"
+                      autocomplete="text"
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       placeholder="1000000"
                       onChange={(e) => setPrice(e.target.value)}
@@ -206,6 +213,7 @@ function FormCreate() {
                 <button
                   type="submit"
                   className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  onClick={handleSubmit}
                 >
                   Tạo
                 </button>
