@@ -17,7 +17,14 @@ function FormCreate() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = JSON.stringify({
-
+      name: name,
+      phone: phone,
+      district: selectedDistrict,
+      street: street,
+      area: area,
+      price: price,
+      description: description,
+      picture: picture,
     })
     await createAccomadation(data)
   };
