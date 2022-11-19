@@ -1,7 +1,9 @@
-import axios from '../utils/request';
+import axios from "../utils/request";
 
-const getExampleService = () => {
-  return axios.get('/cho-o');
-}
+export const getExampleService = () => {
+  return axios.get("/cho-o");
+};
 
-export { getExampleService };
+export const getAllAccomodations = () => {
+  return axios.get("/cho-o/get-all");
+};

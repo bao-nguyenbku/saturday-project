@@ -20,7 +20,10 @@ const SearchBar = ({ topic, onSearch }) => {
         variant="outlined"
         onClick={
           onSearch
-            ? onSearch
+            ? (e) => {
+                e.preventDefault();
+                onSearch(value);
+              }
             : (e) => {
                 e.preventDefault();
               }
