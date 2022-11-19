@@ -1,3 +1,13 @@
+# Routing Guide
+
+For adminstrative purpose, a folder should be made inside "src/pages".
+To provide routes to the router, in "src/routes.js" an entry should be added to the Routes array by the following syntax:
+{
+path: {the recommended path in string},
+element: {the component to display}
+}
+For better organization it is recommended to create in each folder a "routes.js" file which export its own route array. This array would be imported to the main "src/routes.js".
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
