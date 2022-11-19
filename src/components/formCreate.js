@@ -76,7 +76,7 @@ function FormCreate() {
                       onChange={(e) => setSelectedDistrict(e.target.value)}
                       required
                     >
-                      <option>Quận 1</option>
+                      <option value="quận 1">Quận 1</option>
                     </select>
                   </div>
 
@@ -190,7 +190,7 @@ function FormCreate() {
                             name="file-upload"
                             type="file"
                             className="sr-only"
-                            onChange={(e) => setPicture(e.target.files[0])}
+                            onChange={(e) => {setPicture(e.target.files[0]); console.log(e.target.files[0])}}
                           />
                         </label>
                         <p className="pl-1">or drag and drop</p>
