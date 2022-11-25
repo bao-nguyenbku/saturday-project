@@ -92,9 +92,9 @@ const mockData = [
 export default function AccommodationGridView() {
   let [accommodationList, setAccommodationList] = useState([]);
 
-  useEffect(() => {
-    getAllAccommodation().then(response => setAccommodationList(response.data));
-  });
+  // useEffect(() => {
+  //   getAllAccommodation().then(response => setAccommodationList(response.data));
+  // });
   return (
     <div className='grid grid-cols-4 mt-9 gap-[20px]'>
       {mockData.map(item => {

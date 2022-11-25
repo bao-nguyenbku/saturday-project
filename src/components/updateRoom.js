@@ -1,7 +1,8 @@
 import { useEffect, useState} from "react";
 import { postUpdateAccommodation } from "../services/accommodation";
 
-function Update() {
+function Update(props) {
+    const { id } = props;
     const [name, setName] = useState("")
     const [phone, setPhone] = useState("")
     const [district, setDistrict] = useState("")
@@ -10,18 +11,27 @@ function Update() {
     const [area, setArea] = useState("")
     const [price, setPrice] = useState("")
     const [detail, setDetail] = useState("")
+    const [image, setImage] = useState("img")
+    const [owner, setOwner] =useState("")
     const handleUpdateSubmit = async (e) =>{
       e.preventDefault();
       const res = await postUpdateAccommodation(
         {
+          "id" : id,
           "ten" : name,
           "soNha" : numberAddress,
-          "tenDuong": streetName,
+          "tenDuong" : streetName,
           "quan" : district,
-          "dienTich": area,
+          "dienTich" : area,
+          "hinhAnh" : image,
+          "chuNha" : {
+            "ten" : owner,
+            "soDienThoai": phone
+          }
         }
       )
     }
+
     useEffect (()=> {
       setDistrict("Quận 1")
     },[])
@@ -41,12 +51,32 @@ function Update() {
                       Tên
                     </label>
                     <input
+                      autoFocus
+                      onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
                       type="text"
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
+                      required
                     />
                   </div>
+
+                  <div className="col-span-6 sm:col-span-3">
+                    <label
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Tên Chủ Nhà
+                    </label>
+                    <input
+                      onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
+                      name ="owner"
+                      type="text"
+                      className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      value={owner}
+                      onChange={(e) => setOwner(e.target.value)}
+                      required
+                    />
+                  </div>  
 
                   <div className="col-span-6 sm:col-span-4">
                     <label
@@ -55,10 +85,13 @@ function Update() {
                       Số điện thoại
                     </label>
                     <input
+                      onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
+                      name = "phone"
                       type="text"
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
+                      required
                     />
                   </div>
 
@@ -106,10 +139,13 @@ function Update() {
                       Số Nhà
                     </label>
                     <input
+                      onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
+                      name ="numberAddress"
                       type="text"
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       value={numberAddress}
                       onChange={(e) => setNumberAddress(e.target.value)}
+                      required
                     />
                   </div>
 
@@ -120,10 +156,13 @@ function Update() {
                       Tên Đường
                     </label>
                     <input
+                      onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
+                      name = "streetname"
                       type="text"
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       value={streetName}
                       onChange={(e) => setStreetName(e.target.value)}
+                      required
                     />
                   </div>
 
@@ -134,11 +173,14 @@ function Update() {
                       Diện tích
                     </label>
                     <input
+                      onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
+                      name ="area"
                       type="text"
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       placeholder="50m2"
                       value={area}
                       onChange={(e) => setArea(e.target.value)}
+                      required
                     />
                   </div>
 
@@ -149,11 +191,14 @@ function Update() {
                       Giá
                     </label>
                     <input
+                      onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
+                      name ="price"
                       type="text"
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       placeholder="1000000VND"
                       value={price}
                       onChange={(e) => setPrice(e.target.value)}
+                      required
                     />
                   </div>
 
@@ -167,6 +212,8 @@ function Update() {
                   </label>
                   <div className="mt-1">
                     <textarea
+                      onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
+                      name = "detail"
                       rows="3"
                       className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md"
                       placeholder=""
