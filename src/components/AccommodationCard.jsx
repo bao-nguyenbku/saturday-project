@@ -7,6 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
+import EditIcon from '@mui/icons-material/Edit';
 import { experimentalStyled as styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
@@ -46,8 +47,11 @@ export default function AccommodationCard(props) {
 
       <Grid container spacing={2}>
         <Grid item xs={6}>
-          <Item><IconButton aria-label="add to favorites">
-          <FavoriteIcon />
+          <Item><IconButton 
+          aria-label="add to favorites"
+          
+          >
+          <EditIcon />
         </IconButton></Item>
         </Grid>
         <Grid item xs={6}>

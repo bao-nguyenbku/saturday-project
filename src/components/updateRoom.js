@@ -14,6 +14,7 @@ function Update() {
       e.preventDefault();
       const res = await postUpdateAccommodation(
         {
+          
           "ten" : name,
           "soNha" : numberAddress,
           "tenDuong": streetName,
