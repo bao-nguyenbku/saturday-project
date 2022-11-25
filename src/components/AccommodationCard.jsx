@@ -1,18 +1,4 @@
 import * as React from "react";
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
-import { experimentalStyled as styled } from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
 import { IoLocation, IoTrash, IoPencil } from 'react-icons/io5';
 import styles from './styles.module.css';
 import { formatCurrency } from '../utils/utils';
@@ -28,7 +14,7 @@ export default function AccommodationCard(props) {
   return (
     <div className="max-w-sm bg-slate-100 rounded-xl hover:shadow-lg transition-shadow duration-500 cursor-pointer">
       <div className={styles.inner}>
-        <img src={data.hinhAnh} alt="anh-dai-dien" className="rounded-t-xl"/>
+        <img src={data.hinhAnh} alt="anh-dai-dien" className="rounded-t-xl h-[200px] w-full object-cover"/>
         <div className="flex absolute top-3 right-3 gap-1"
           onClick={()=> {
             navigate(`/${data.id}/update`)
