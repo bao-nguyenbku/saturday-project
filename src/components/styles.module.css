@@ -1,0 +1,13 @@
+.inner {
+  @apply overflow-hidden;
+  @apply relative;
+  @apply rounded-t-xl;
+}
+
+.inner > img {
+  transition: all 0.5s ease;
+}
+
+.inner:hover > img {
+  transform: scale(1.1);
+}

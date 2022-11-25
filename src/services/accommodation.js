@@ -17,5 +17,9 @@ const createAccomadation = (data) => {
   console.log(data)
   return axios.post('/cho-o/create', data);
 }
+<<<<<<< HEAD
 
 export { getExampleService, getAllAccommodation, createAccomadation ,postUpdateAccommodation};
+=======
+export { getExampleService, getAllAccommodation ,postUpdateAccommodation, createAccomadation};
+>>>>>>> main
