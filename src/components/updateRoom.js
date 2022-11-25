@@ -1,10 +1,8 @@
 import { useEffect, useState} from "react";
-import { useLocation } from "react-router";
 import { postUpdateAccommodation } from "../services/accommodation";
 
-function Update() {
-    const {state} = useLocation()
-    const {id, chuNhaId} = state
+function Update(props) {
+    const { id } = props;
     const [name, setName] = useState("")
     const [phone, setPhone] = useState("")
     const [district, setDistrict] = useState("")
@@ -24,11 +22,9 @@ function Update() {
           "soNha" : numberAddress,
           "tenDuong" : streetName,
           "quan" : district,
-          "chuNhaId" : chuNhaId,
           "dienTich" : area,
           "hinhAnh" : image,
           "chuNha" : {
-            "id" : chuNhaId,
             "ten" : owner,
             "soDienThoai": phone
           }

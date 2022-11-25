@@ -31,7 +31,7 @@ export default function AccommodationCard(props) {
         <img src={data.hinhAnh} alt="anh-dai-dien" className="rounded-t-xl"/>
         <div className="flex absolute top-3 right-3 gap-1"
           onClick={()=> {
-            navigate('update', {state: {id: data.id , chuNhaId: data.chuNhaId}})
+            navigate(`/${data.id}/update`)
           }}
         >
           <span className="bg-zinc-800/70 p-2 rounded-full">
