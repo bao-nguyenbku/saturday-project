@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { getAccommodation } from "../services/accommodation";
+import { formatCurrency } from '../utils/utils';
+
 
 const mockData = {
     id: 1,
@@ -34,7 +36,7 @@ function Detail(props) {
                     <div className="p-5">
                         <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{accommodationData.ten}</h5>
                         <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Địa chỉ: {accommodationData.soNha}, {accommodationData.tenDuong}, {accommodationData.quan}</p>
-                        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Giá: {accommodationData.gia} đ/tháng</p>
+                        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Giá: {formatCurrency.format(accommodationData.gia)} / tháng</p>
                         <h6 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{accommodationData.moTa}</h6>
                         <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Liên hệ : {accommodationData.chuNha.ten} - {accommodationData.chuNha.soDienThoai} </p>
                     </div>
