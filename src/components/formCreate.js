@@ -40,7 +40,7 @@ function FormCreate() {
           title: "Tạo thành công",
           icon: "success",
           confirmButtonText: "OK",
-        }).then((result) => {
+        }).then((res) => {
           navigate('/')
         })
       })
