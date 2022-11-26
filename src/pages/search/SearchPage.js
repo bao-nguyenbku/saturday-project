@@ -48,7 +48,7 @@ const SearchPage = () => {
             comp = entry[param];
             if (comp < value.from || comp > value.to) val = -1;
             else val = 1;
-      
+
             if (val === -1) return false;
           }
         }
@@ -213,15 +213,27 @@ const SearchPage = () => {
             onChange={(event) => onChangeSearchValue(event, "chuNha")}
           />
         </div>
-        <Button
-          variant="contained"
-          onClick={(e) => {
-            e.preventDefault();
-            handleSearch();
-          }}
-        >
-          <FaSearch size={40} />
-        </Button>
+        <div className={`flex gap-2 col-span-3`}>
+          <Button
+            variant="contained"
+            onClick={(e) => {
+              e.preventDefault();
+              handleSearch();
+            }}
+          >
+            <FaSearch size={40} />
+          </Button>
+          <Button
+            variant="contained"
+            onClick={(e) => {
+              e.preventDefault();
+              setSearchCriteria({});
+            }}
+            fullWidth
+          >
+            Xóa bộ lọc
+          </Button>
+        </div>
       </div>
       <div className="grid grid-cols-4 mt-9 gap-[20px]">
         {searchResult.map((entry, index) => (
