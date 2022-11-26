@@ -3,9 +3,6 @@ import AccommodationCard from "../../components/AccommodationCard";
 import { Button, InputLabel, TextField } from "@mui/material";
 import { FaSearch } from "react-icons/fa";
 import { getAllAccommodation } from "../../services/accommodation";
-// import useSWR from "swr";
-
-// const fetcher = (args) => getAllAccommodation().then((res) => res.json());
 
 const SearchPage = () => {
   const [searchResult, setSearchResult] = useState([]);
