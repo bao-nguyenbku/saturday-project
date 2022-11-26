@@ -21,7 +21,7 @@ function FormCreate() {
 
 
   const handleSubmit = async (e) => {
-    var data = JSON.stringify({
+    const data = JSON.stringify({
       "ten": houseName,
       "soNha": houseNumber,
       "tenDuong": street,
@@ -40,8 +40,9 @@ function FormCreate() {
           title: "Tạo thành công",
           icon: "success",
           confirmButtonText: "OK",
+        }).then((result) => {
+          navigate('/')
         })
-        console.log(res);
       })
       .catch((err) => {
         Swal.fire({
