@@ -1,8 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { experimentalStyled as styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
 import AccommodationCard from './AccommodationCard';
 import { getAllAccommodation } from '../services/accommodation';
 
@@ -94,10 +90,10 @@ export default function AccommodationGridView() {
 
   useEffect(() => {
     getAllAccommodation().then(response => setAccommodationList(response.data));
-  });
+  }, []);
   return (
     <div className='grid grid-cols-4 mt-9 gap-[20px]'>
-      {mockData.map(item => {
+      {accommodationList.map(item => {
         return (
           <AccommodationCard key={item.id} data={item}/>
         )
