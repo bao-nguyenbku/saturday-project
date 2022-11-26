@@ -7,6 +7,7 @@ const getExampleService = () => {
 const getAllAccommodation = () =>{
   return axios.get('/cho-o/get-all');
 }
+
 const deleteAccommodationById = (id) => {
   return axios.delete('/ch-o', id);
 }
@@ -14,4 +15,15 @@ const createAccomadation = (data) => {
   return axios.post('/cho-o/create', data);
 }
 
-export { getExampleService, getAllAccommodation, createAccomadation, deleteAccommodationById };
+
+const getAccommodation = (id) =>{
+  return axios.get(`/cho-o/${id}`);
+}
+
+const postUpdateAccommodation = (p) => {
+  console.log(p)
+  return axios.put('/cho-o', p);
+}
+
+export { getExampleService, getAllAccommodation, getAccommodation ,postUpdateAccommodation, createAccomadation, deleteAccommodationById};
+

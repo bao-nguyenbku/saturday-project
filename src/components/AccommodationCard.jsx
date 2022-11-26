@@ -16,6 +16,7 @@ export default function AccommodationCard(props) {
       navigate('/');
     })
   }
+
   return (
     <div className="max-w-sm bg-slate-100 rounded-xl hover:shadow-lg transition-shadow duration-500 cursor-pointer">
       <div className={styles.inner}>
