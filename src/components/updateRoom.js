@@ -3,6 +3,31 @@ import { postUpdateAccommodation } from "../services/accommodation";
 import axios from "../utils/request";
 import { useNavigate } from "react-router";
 
+const InputField = (inputProps) => {
+  const { value, onChange, preventEnterPress, label } = inputProps;
+  return (
+    <div className="col-span-6 sm:col-span-3">
+      <label
+        className="block text-sm font-medium text-gray-700"
+      >
+        {label}
+      </label>
+      <input
+        autoFocus
+        onKeyPress={(e) => {
+          if (preventEnterPress) {
+            e.preventDefault();
+          }
+        }}
+        type="text"
+        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 border-indigo-500 block w-full shadow-sm sm:text-sm rounded-md h-14 border-2 pl-2"
+        value={value}
+        onChange={onChange}
+        required
+      />
+    </div>
+  )
+}
 function Update(props) {
   const { id } = props;
   const [accommodationData, setAccommodationData] = useState();
@@ -10,7 +35,7 @@ function Update(props) {
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
     const res = await postUpdateAccommodation(
-      accommodationData  
+      accommodationData
     )
     if (res) {
       navigate('/');
@@ -27,84 +52,54 @@ function Update(props) {
   }, [id])
   if (accommodationData) {
     return (
-      <div className="form">
-        <div className="md:grid md:grid-cols-3 md:gap-6">
-          <div className="mt-5 md:mt-0 md:col-span-2">
-            <form >
-              <div className="shadow sm:rounded-md sm:overflow-hidden">
+      <div className="w-full items-center justify-center">
+        <div className="md:grid md:grid-cols-2 md:gap-6 overflow-x-hidden">
+          <div className="mt-5 md:mt-0 md:col-span-2 overflow-x-hidden">
+            <form>
+              <div className="shadow sm:rounded-md overflow-x-hidden">
                 <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
                   <div className="grid grid-cols-6 gap-6">
-                    <div className="col-span-6 sm:col-span-3">
-                      <label
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        Tên
-                      </label>
-                      <input
-                        autoFocus
-                        onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
-                        type="text"
-                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                        value={accommodationData?.ten}
-                        onChange={(e) => setAccommodationData(prev => {
-                          return {
-                            ...prev,
+                    <InputField
+                      label='Tên chỗ ở'
+                      value={accommodationData?.ten}
+                      onChange={(e) => setAccommodationData(prev => {
+                        return {
+                          ...prev,
+                          ten: e.target.value
+                        }
+                      })}
+                      preventEnterPress
+                    />
+
+                    <InputField
+                      label='Tên chủ nhà'
+                      value={accommodationData?.chuNha?.ten}
+                      onChange={(e) => setAccommodationData(prev => {
+                        return {
+                          ...prev,
+                          chuNha: {
+                            ...prev.chuNha,
                             ten: e.target.value
                           }
-                        })}
-                        required
-                      />
-                    </div>
+                        }
+                      })}
+                      preventEnterPress
+                    />
 
-                    <div className="col-span-6 sm:col-span-3">
-                      <label
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        Tên Chủ Nhà
-                      </label>
-                      <input
-                        onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
-                        name="owner"
-                        type="text"
-                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                        value={accommodationData?.chuNha?.ten}
-                        onChange={(e) => setAccommodationData(prev => {
-                          return {
-                            ...prev,
-                            chuNha: {
-                              ...prev.chuNha,
-                              ten: e.target.value
-                            }
+                    <InputField
+                      label='Số điện thoại'
+                      value={accommodationData?.chuNha?.id}
+                      onChange={(e) => setAccommodationData(prev => {
+                        return {
+                          ...prev,
+                          chuNha: {
+                            ...prev.chuNha,
+                            soDienThoai: e.target.value
                           }
-                        })}
-                        required
-                      />
-                    </div>
-
-                    <div className="col-span-6 sm:col-span-4">
-                      <label
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        Số điện thoại
-                      </label>
-                      <input
-                        onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
-                        name="phone"
-                        type="text"
-                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                        value={accommodationData?.chuNha?.soDienThoai}
-                        onChange={(e) => setAccommodationData(prev => {
-                          return {
-                            ...prev,
-                            chuNha: {
-                              ...prev.chuNha,
-                              soDienThoai: e.target.value
-                            }
-                          }
-                        })}
-                        required
-                      />
-                    </div>
+                        }
+                      })}
+                      preventEnterPress
+                    />
 
                     <div className="col-span-6 sm:col-span-3">
                       <label
@@ -148,151 +143,106 @@ function Update(props) {
                       </select>
                     </div>
 
-                    <div className="col-span-6">
-                      <label
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        Số Nhà
-                      </label>
-                      <input
-                        onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
-                        name="numberAddress"
-                        type="text"
-                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                        value={accommodationData?.soNha}
-                        onChange={(e) => setAccommodationData(prev => {
-                          return {
-                            ...prev,
-                            soNha: e.target.value
-                          }
-                        })}
-                        required
-                      />
-                    </div>
-
-                    <div className="col-span-6">
-                      <label
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        Tên Đường
-                      </label>
-                      <input
-                        onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
-                        name="streetname"
-                        type="text"
-                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                        value={accommodationData?.tenDuong}
-                        onChange={(e) => setAccommodationData(prev => {
-                          return {
-                            ...prev,
-                            tenDuong: e.target.value
-                          }
-                        })}
-                        required
-                      />
-                    </div>
-
-                    <div className="col-span-6 sm:col-span-4">
-                      <label
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        Diện tích
-                      </label>
-                      <input
-                        onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
-                        name="area"
-                        type="text"
-                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                        placeholder="50m2"
-                        value={accommodationData?.dienTich}
-                        onChange={(e) => setAccommodationData(prev => {
-                          return {
-                            ...prev,
-                            dienTich: e.target.value
-                          }
-                        })}
-                        required
-                      />
-                    </div>
-
-                    <div className="col-span-6 sm:col-span-4">
-                      <label
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        Giá
-                      </label>
-                      <input
-                        onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
-                        name="price"
-                        type="text"
-                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                        placeholder="1000000VND"
-                        value={accommodationData?.gia}
-                        onChange={(e) => setAccommodationData(prev => {
-                          return {
-                            ...prev,
-                            gia: e.target.value
-                          }
-                        })}
-                        required
-                      />
-                    </div>
-
-                  </div>
-
-                  <div>
-                    <label
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      Mô tả
-                    </label>
-                    <div className="mt-1">
-                      <textarea
-                        onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
-                        name="detail"
-                        rows="3"
-                        className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md"
-                        placeholder=""
-                        value={accommodationData?.moTa}
-                        onChange={(e) => setAccommodationData(prev => {
-                          return {
-                            ...prev,
-                            moTa: e.target.value
-                          }
-                        })}
-                      ></textarea>
-                    </div>
-                    <p className="mt-2 text-sm text-gray-500">
-                      Mô tả ngắn gọn thông tin phòng trọ.
-                    </p>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                      Hình ảnh minh họa
-                    </label>
-                    <img src={accommodationData?.hinhAnh} alt='anh-minh-hoa' className="w-[400px] object-cover"/>
-                    <input
-                      type="url"
-                      name="picture"
-                      id="picture"
-                      placeholder={accommodationData?.hinhAnh}
+                    <InputField
+                      label='Số nhà'
+                      value={accommodationData?.soNha}
                       onChange={(e) => setAccommodationData(prev => {
                         return {
                           ...prev,
-                          hinhAnh: e.target.value
+                          soNha: e.target.value
                         }
                       })}
-                      pattern="https://.*"
-                      size="30"
+                      preventEnterPress
                     />
-                  </div>
 
+                    <InputField
+                      label='Tên đường'
+                      value={accommodationData?.tenDuong}
+                      onChange={(e) => setAccommodationData(prev => {
+                        return {
+                          ...prev,
+                          tenDuong: e.target.value
+                        }
+                      })}
+                      preventEnterPress
+                    />
+
+                    <InputField
+                      label='Diện tích'
+                      value={accommodationData?.dienTich}
+                      onChange={(e) => setAccommodationData(prev => {
+                        return {
+                          ...prev,
+                          dienTich: e.target.value
+                        }
+                      })}
+                      preventEnterPress
+                    />
+
+                    <InputField
+                      label='Giá thuê'
+                      value={accommodationData?.gia}
+                      onChange={(e) => setAccommodationData(prev => {
+                        return {
+                          ...prev,
+                          gia: e.target.value
+                        }
+                      })}
+                      preventEnterPress
+                    />
+                    <div className="col-span-6 sm:col-span-3">
+                      <label
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Mô tả
+                      </label>
+                      <div className="mt-1">
+                        <textarea
+                          onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
+                          name="detail"
+                          rows="3"
+                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 border-indigo-500 block w-full shadow-sm sm:text-sm rounded-md border-2 pl-2"
+                          placeholder=""
+                          value={accommodationData?.moTa}
+                          onChange={(e) => setAccommodationData(prev => {
+                            return {
+                              ...prev,
+                              moTa: e.target.value
+                            }
+                          })}
+                        ></textarea>
+                      </div>
+                      <p className="mt-2 text-sm text-gray-500">
+                        Mô tả ngắn gọn thông tin phòng trọ.
+                      </p>
+                    </div>
+                    <div className="col-span-6 sm:col-span-3 flex flex-col">
+                      <label className="block text-sm font-medium text-gray-700">
+                        Hình ảnh minh họa
+                      </label>
+                      <img src={accommodationData?.hinhAnh} alt='anh-minh-hoa' className="w-[400px] object-cover m-auto rounded-xl" />
+                      <input
+                        type="url"
+                        name="picture"
+                        id="picture"
+                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 border-indigo-500 block w-full shadow-sm sm:text-sm rounded-md h-14 border-2 pl-2"
+                        placeholder={accommodationData?.hinhAnh}
+                        onChange={(e) => setAccommodationData(prev => {
+                          return {
+                            ...prev,
+                            hinhAnh: e.target.value
+                          }
+                        })}
+                        pattern="https://.*"
+                        size="30"
+                      />
+                    </div>
+                  </div>
                 </div>
                 <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
                   <button
                     type="text"
-                    className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm font-bold rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-full h-14 text-2xl items-center"
                     onClick={handleUpdateSubmit}
                   >
                     Cập nhật
