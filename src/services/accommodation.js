@@ -8,6 +8,16 @@ const getAllAccommodation = () =>{
   return axios.get('/cho-o/get-all');
 }
 
+const deleteAccommodationById = (id) => {
+  return axios.delete('/cho-o', { 
+    data: { id }
+   });
+}
+const createAccomadation = (data) => {
+  return axios.post('/cho-o/create', data);
+}
+
+
 const getAccommodation = (id) =>{
   return axios.get(`/cho-o/${id}`);
 }
@@ -17,11 +27,5 @@ const postUpdateAccommodation = (p) => {
   return axios.put('/cho-o', p);
 }
 
-const createAccomadation = (data) => {
-  return axios.post('/cho-o', data, {
-    headers: {
-      'Content-Type': 'application/json',
-    }
-  });
-}
-export { getExampleService, getAllAccommodation, getAccommodation ,postUpdateAccommodation, createAccomadation};
+export { getExampleService, getAllAccommodation, getAccommodation ,postUpdateAccommodation, createAccomadation, deleteAccommodationById};
+
