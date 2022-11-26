@@ -21,17 +21,6 @@ function FormCreate() {
 
 
   const handleSubmit = async (e) => {
-    // console.log(typeof houseName)
-    // console.log(typeof houseNumber)
-    // console.log(typeof street)
-    // console.log(typeof selectedDistrict)
-    // console.log(parseInt(area))
-    // console.log(typeof area)
-    // console.log(parseInt(price))
-    // console.log(typeof price)
-    // console.log(typeof picture)
-    // console.log(typeof owner)
-    // console.log(typeof phone)
     var data = JSON.stringify({
       "ten": houseName,
       "soNha": houseNumber,
@@ -87,7 +76,8 @@ function FormCreate() {
   }, []);
 
   return (
-    <div className="form">
+    <div className="items-center p-12"> 
+      <div className="form">
       <div className="md:grid md:grid-cols-3 md:gap-6">
         <div className="mt-5 md:mt-0 md:col-span-2">
           <form id="create">
@@ -105,7 +95,8 @@ function FormCreate() {
                       type="text"
                       name="house_name"
                       id="house_name"
-                      className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-md lg:text-lg border border-gray-300 rounded-md py-3 px-4"
+                      // className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                       onChange={(e) => setHouseName(e.target.value)}
                       required
                     />
@@ -122,7 +113,7 @@ function FormCreate() {
                       type="text"
                       name="first_name"
                       id="first_name"
-                      className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-md lg:text-lg border border-gray-300 rounded-md py-3 px-4"
                       onChange={(e) => setOwner(e.target.value)}
                       required
                     />
@@ -139,7 +130,7 @@ function FormCreate() {
                       type="tel"
                       name="phone"
                       id="phone"
-                      className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-md lg:text-lg border border-gray-300 rounded-md py-3 px-4"
                       onChange={(e) => setPhone(e.target.value)}
                       required
                     />
@@ -147,7 +138,7 @@ function FormCreate() {
 
                   <div className="col-span-6">
                     <label
-                      for="country"
+                      for="district"
                       className="block text-sm font-medium text-gray-700"
                     >
                       Quận
@@ -155,7 +146,7 @@ function FormCreate() {
                     <select
                       id="district"
                       name="district"
-                      className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 lg:text-lg"
                       onChange={(e) => {
                         selectedDistrict = e.target.value;
                         console.log(selectedDistrict);
@@ -183,7 +174,8 @@ function FormCreate() {
                       type="text"
                       name="first_name"
                       id="first_name"
-                      className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      placeholder="123"
+                      className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-md lg:text-lg border border-gray-300 rounded-md py-3 px-4"
                       onSelect={(e) => setHouseNumber(e.target.value)}
                       required
                     />
@@ -200,7 +192,8 @@ function FormCreate() {
                       type="text"
                       name="street_address"
                       id="street_address"
-                      className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      placeholder="Ly Thuong Kiet"
+                      className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-md lg:text-lg border border-gray-300 rounded-md py-3 px-4"
                       onChange={(e) => setStreet(e.target.value)}
                       required
                     />
@@ -208,7 +201,7 @@ function FormCreate() {
 
                   <div className="col-span-6">
                     <label
-                      for="email_address"
+                      for="area"
                       className="block text-sm font-medium text-gray-700"
                     >
                       Diện tích
@@ -217,16 +210,16 @@ function FormCreate() {
                       type="text"
                       name="area"
                       id="area"
-                      className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                      placeholder="20m2"
+                      className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-md lg:text-lg border border-gray-300 rounded-md py-3 px-4"
+                      placeholder="20"
                       onChange={(e) => setArea(e.target.value)}
                       required
                     />
                   </div>
 
-                  <div className="col-span-6 sm:col-span-4">
+                  <div className="col-span-6">
                     <label
-                      for="email_address"
+                      for="price"
                       className="block text-sm font-medium text-gray-700"
                     >
                       Giá
@@ -235,7 +228,7 @@ function FormCreate() {
                       type="text"
                       name="price"
                       id="price"
-                      className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-md lg:text-lg border border-gray-300 rounded-md py-3 px-4"
                       placeholder="1000000"
                       onChange={(e) => setPrice(e.target.value)}
                       required
@@ -249,6 +242,7 @@ function FormCreate() {
                   </label>
                   <input
                     type="url"
+                    className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-md lg:text-lg border border-gray-300 rounded-md py-3 px-4"
                     name="picture"
                     id="picture"
                     placeholder="https://example.com"
@@ -262,7 +256,7 @@ function FormCreate() {
                 <button
                   type="button"
                   onClick={handleSubmit}
-                  className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  className="inline-flex justify-center py-2 px-4 border border-transparent shadow-md text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
                   Tạo
                 </button>
@@ -272,6 +266,8 @@ function FormCreate() {
         </div>
       </div>
     </div>
+    </div>
+    
   );
 }
 

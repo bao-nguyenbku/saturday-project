@@ -16,7 +16,7 @@ const postUpdateAccommodation = (p) => {
 const createAccomadation = (data) => {
   const config = {
     method: 'post',
-    url: 'https://cnpm-nang-cao-app.herokuapp.com/cho-o',
+    url: '/cho-o',
     headers: {
       'Content-Type': 'application/json',
     },
