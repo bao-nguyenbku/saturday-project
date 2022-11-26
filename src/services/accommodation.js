@@ -9,7 +9,9 @@ const getAllAccommodation = () =>{
 }
 
 const deleteAccommodationById = (id) => {
-  return axios.delete('/ch-o', id);
+  return axios.delete('/cho-o', { 
+    data: { id }
+   });
 }
 const createAccomadation = (data) => {
   return axios.post('/cho-o/create', data);
