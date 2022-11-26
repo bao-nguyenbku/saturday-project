@@ -228,6 +228,7 @@ const SearchPage = () => {
             onClick={(e) => {
               e.preventDefault();
               setSearchCriteria({});
+              setSearchResult([]);
             }}
             fullWidth
           >
