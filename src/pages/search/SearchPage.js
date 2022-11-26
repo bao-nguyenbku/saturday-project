@@ -16,8 +16,6 @@ const SearchPage = () => {
   const matchSearch = (criteria, data) => {
     let res = data.filter((entry) => {
       for (const [param, value] of Object.entries(criteria)) {
-        // console.log(`[${param}]: ${value}`);
-
         if (typeof value !== "object") {
           let valueArray = value
             .split(" ")
@@ -50,7 +48,7 @@ const SearchPage = () => {
             comp = entry[param];
             if (comp < value.from || comp > value.to) val = -1;
             else val = 1;
-            // console.log(val);
+      
             if (val === -1) return false;
           }
         }
