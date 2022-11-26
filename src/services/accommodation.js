@@ -8,6 +8,10 @@ const getAllAccommodation = () =>{
   return axios.get('/cho-o/get-all');
 }
 
+const getAccommodation = (id) =>{
+  return axios.get(`/cho-o/${id}`);
+}
+
 const postUpdateAccommodation = (p) => {
   console.log(p)
   return axios.put('/cho-o', p);
@@ -21,4 +25,4 @@ const createAccomadation = (data) => {
     }
   });
 }
-export { getExampleService, getAllAccommodation ,postUpdateAccommodation, createAccomadation};
+export { getExampleService, getAllAccommodation, getAccommodation ,postUpdateAccommodation, createAccomadation};
