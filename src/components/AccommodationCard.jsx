@@ -3,14 +3,19 @@ import { IoLocation, IoTrash, IoPencil } from 'react-icons/io5';
 import styles from './styles.module.css';
 import { formatCurrency } from '../utils/utils';
 import { Link, NavLink, useNavigate } from "react-router-dom";
-
+import { deleteAccommodationById } from '../services/accommodation';
 export default function AccommodationCard(props) {
   const { data } = props;
 
   const hostInfo = `${props.data.chuNha.ten} - ${props.data.chuNha.soDienThoai}`;
   const [showModal, setShowModal] = React.useState(false);
   const navigate = useNavigate()
-  
+  const deleteChoOById = (id) => {
+    deleteAccommodationById(id)
+    .then((res) => {
+      navigate('/');
+    })
+  }
   return (
     <div className="max-w-sm bg-slate-100 rounded-xl hover:shadow-lg transition-shadow duration-500 cursor-pointer">
       <div className={styles.inner}>
@@ -65,7 +70,7 @@ export default function AccommodationCard(props) {
                   <button
                     className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                     type="button"
-                    onClick={() => {navigate(`/${data.id}/delete`)}}
+                    onClick={() => deleteChoOById(data.id)}
                   >
                     Save Changes
                   </button>
