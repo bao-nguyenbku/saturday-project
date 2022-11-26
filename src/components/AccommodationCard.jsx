@@ -11,7 +11,9 @@ export default function AccommodationCard(props) {
   const [showModal, setShowModal] = React.useState(false);
   const navigate = useNavigate();
   const deleteChoOById = (id) => {
-    deleteAccommodationById(parseInt(id));
+    deleteAccommodationById(parseInt(id)).then(res=>{document.location.reload();
+
+    }) ;
   };
 
   return (
@@ -59,7 +61,9 @@ export default function AccommodationCard(props) {
                       </div>
                       {/*body*/}
                       <div className="relative p-6 flex-auto">
-                        <p className="my-4 text-slate-500 text-lg leading-relaxed"></p>
+                        <p className="my-4 text-slate-500 text-lg leading-relaxed">
+                          Bạn có muốn xóa chỗ ở này không ?
+                        </p>
                       </div>
                       {/*footer*/}
                       <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
@@ -75,7 +79,7 @@ export default function AccommodationCard(props) {
                           type="button"
                           onClick={() => deleteChoOById(data.id)}
                         >
-                          Save Changes
+                          Yes
                         </button>
                       </div>
                     </div>
