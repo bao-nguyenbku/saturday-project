@@ -9,6 +9,8 @@ export default function AccommodationGridView() {
     getAllAccommodation().then(response => setAccommodationList(response.data));
   }, []);
   return (
+    <>
+    <p className="text-3xl font-bold">Danh sách nhà trọ</p>
     <div className='grid grid-cols-4 mt-9 gap-[20px]'>
       {accommodationList.map(item => {
         return (
@@ -16,6 +18,7 @@ export default function AccommodationGridView() {
         )
       })}
     </div>
+    </>
   )
   // return (
   //   <Box sx={{ flexGrow: 1 }}>

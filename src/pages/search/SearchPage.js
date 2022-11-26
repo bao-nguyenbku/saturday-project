@@ -8,6 +8,7 @@ const SearchPage = () => {
   const [searchResult, setSearchResult] = useState([]);
   const [searchCriteria, setSearchCriteria] = useState({});
   const [data, setData] = useState([]);
+  const [justSearch, setJustSearch] = useState(false);
 
   function removeAccents(str) {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -69,6 +70,7 @@ const SearchPage = () => {
       });
       let res = matchSearch(searchCriteria, temp);
       setSearchResult(res);
+      setJustSearch(true);
     } catch (err) {
       console.log(err);
     }
@@ -236,6 +238,7 @@ const SearchPage = () => {
           </Button>
         </div>
       </div>
+      {justSearch && <div><br/>Kết quả tìm kiếm : <span style={{color:'red', fontWeight:'bold', fontSize:'25px'}}>{searchResult.length}</span> kết quả</div>}
       <div className="grid grid-cols-4 mt-9 gap-[20px]">
         {searchResult.map((entry, index) => (
           <div key={index}>
@@ -243,6 +246,10 @@ const SearchPage = () => {
           </div>
         ))}
       </div>
+      <br/>
+        <br/>
+        <br/>
+        <br/>
     </div>
   );
 };
