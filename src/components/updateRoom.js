@@ -1,38 +1,20 @@
 import { useEffect, useState } from "react";
 import { postUpdateAccommodation } from "../services/accommodation";
 import axios from "../utils/request";
+import { useNavigate } from "react-router";
 
 function Update(props) {
   const { id } = props;
-  const [name, setName] = useState("")
-  const [phone, setPhone] = useState("")
-  const [district, setDistrict] = useState("")
-  const [streetName, setStreetName] = useState("")
-  const [numberAddress, setNumberAddress] = useState("")
-  const [area, setArea] = useState("")
-  const [price, setPrice] = useState("")
-  const [detail, setDetail] = useState("")
-  const [image, setImage] = useState("img")
-  const [owner, setOwner] = useState("")
   const [accommodationData, setAccommodationData] = useState();
-
+  const navigate = useNavigate();
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
     const res = await postUpdateAccommodation(
-      {
-        "id": id,
-        "ten": name,
-        "soNha": numberAddress,
-        "tenDuong": streetName,
-        "quan": district,
-        "dienTich": area,
-        "hinhAnh": image,
-        "chuNha": {
-          "ten": owner,
-          "soDienThoai": phone
-        }
-      }
+      accommodationData  
     )
+    if (res) {
+      navigate('/');
+    }
   }
   useEffect(() => {
     if (id) {
@@ -64,7 +46,12 @@ function Update(props) {
                         type="text"
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         value={accommodationData?.ten}
-                        onChange={(e) => setName(e.target.value)}
+                        onChange={(e) => setAccommodationData(prev => {
+                          return {
+                            ...prev,
+                            ten: e.target.value
+                          }
+                        })}
                         required
                       />
                     </div>
@@ -81,7 +68,15 @@ function Update(props) {
                         type="text"
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         value={accommodationData?.chuNha?.ten}
-                        onChange={(e) => setOwner(e.target.value)}
+                        onChange={(e) => setAccommodationData(prev => {
+                          return {
+                            ...prev,
+                            chuNha: {
+                              ...prev.chuNha,
+                              ten: e.target.value
+                            }
+                          }
+                        })}
                         required
                       />
                     </div>
@@ -98,7 +93,15 @@ function Update(props) {
                         type="text"
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         value={accommodationData?.chuNha?.soDienThoai}
-                        onChange={(e) => setPhone(e.target.value)}
+                        onChange={(e) => setAccommodationData(prev => {
+                          return {
+                            ...prev,
+                            chuNha: {
+                              ...prev.chuNha,
+                              soDienThoai: e.target.value
+                            }
+                          }
+                        })}
                         required
                       />
                     </div>
@@ -112,7 +115,12 @@ function Update(props) {
                       <select
                         className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                         value={accommodationData?.quan}
-                        onChange={(e) => setDistrict(e.target.value)}
+                        onChange={(e) => setAccommodationData(prev => {
+                          return {
+                            ...prev,
+                            quan: e.target.value
+                          }
+                        })}
                       >
                         <option >Quận 1</option>
                         <option >Quận 2</option>
@@ -152,7 +160,12 @@ function Update(props) {
                         type="text"
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         value={accommodationData?.soNha}
-                        onChange={(e) => setNumberAddress(e.target.value)}
+                        onChange={(e) => setAccommodationData(prev => {
+                          return {
+                            ...prev,
+                            soNha: e.target.value
+                          }
+                        })}
                         required
                       />
                     </div>
@@ -169,7 +182,12 @@ function Update(props) {
                         type="text"
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         value={accommodationData?.tenDuong}
-                        onChange={(e) => setStreetName(e.target.value)}
+                        onChange={(e) => setAccommodationData(prev => {
+                          return {
+                            ...prev,
+                            tenDuong: e.target.value
+                          }
+                        })}
                         required
                       />
                     </div>
@@ -187,7 +205,12 @@ function Update(props) {
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         placeholder="50m2"
                         value={accommodationData?.dienTich}
-                        onChange={(e) => setArea(e.target.value)}
+                        onChange={(e) => setAccommodationData(prev => {
+                          return {
+                            ...prev,
+                            dienTich: e.target.value
+                          }
+                        })}
                         required
                       />
                     </div>
@@ -205,7 +228,12 @@ function Update(props) {
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         placeholder="1000000VND"
                         value={accommodationData?.gia}
-                        onChange={(e) => setPrice(e.target.value)}
+                        onChange={(e) => setAccommodationData(prev => {
+                          return {
+                            ...prev,
+                            gia: e.target.value
+                          }
+                        })}
                         required
                       />
                     </div>
@@ -226,7 +254,12 @@ function Update(props) {
                         className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md"
                         placeholder=""
                         value={accommodationData?.moTa}
-                        onChange={(e) => setDetail(e.target.value)}
+                        onChange={(e) => setAccommodationData(prev => {
+                          return {
+                            ...prev,
+                            moTa: e.target.value
+                          }
+                        })}
                       ></textarea>
                     </div>
                     <p className="mt-2 text-sm text-gray-500">
@@ -244,6 +277,12 @@ function Update(props) {
                       name="picture"
                       id="picture"
                       placeholder={accommodationData?.hinhAnh}
+                      onChange={(e) => setAccommodationData(prev => {
+                        return {
+                          ...prev,
+                          hinhAnh: e.target.value
+                        }
+                      })}
                       pattern="https://.*"
                       size="30"
                     />
@@ -256,7 +295,7 @@ function Update(props) {
                     className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     onClick={handleUpdateSubmit}
                   >
-                    Sửa
+                    Cập nhật
                   </button>
                 </div>
               </div>
