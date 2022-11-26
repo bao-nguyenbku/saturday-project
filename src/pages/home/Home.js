@@ -8,9 +8,8 @@ import { useNavigate } from "react-router";
 const Home = () => {
   const navigate = useNavigate();
   return (
-    <div className="px-[180px] py-[80px] max-w-[1800px] flex flex-col items-center m-auto">
-      <div className="flex items-center w-full justify-center">
-        <SearchPage />
+    <div className="px-[180px] py-[80px] max-w-[1800px] flex flex-col m-auto">
+      <div className="mb-4 justify-end items-end">
         <Button
           variant="contained"
           className="!ml-auto mr-0 !h-[56px]"
@@ -18,6 +17,12 @@ const Home = () => {
         >
           <AddIcon /> Add new
         </Button>
+      </div>
+      <div className="flex items-center w-full justify-center">
+        <div>
+          <SearchPage />
+        </div>
+        
       </div>
       <AccommodationGridView />
     </div>

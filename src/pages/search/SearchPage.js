@@ -202,7 +202,7 @@ const SearchPage = () => {
             />
           </div>
         </div>
-        <div className={`flex gap-2 col-span-3`}>
+        <div className={`flex flex-col gap-2 col-span-3`}>
           <TextField
             fullWidth
             id="filled-basic"
