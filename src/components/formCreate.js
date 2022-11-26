@@ -21,7 +21,7 @@ function FormCreate() {
 
 
   const handleSubmit = async (e) => {
-    const data = JSON.stringify({
+    const data = {
       "ten": houseName,
       "soNha": houseNumber,
       "tenDuong": street,
@@ -33,7 +33,7 @@ function FormCreate() {
         "ten": owner,
         "soDienThoai": phone,
       },
-    });
+    };
     createAccomadation(data)
       .then((res) => {
         Swal.fire({

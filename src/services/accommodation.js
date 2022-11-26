@@ -14,7 +14,7 @@ const deleteAccommodationById = (id) => {
    });
 }
 const createAccomadation = (data) => {
-  return axios.post('/cho-o/create', data);
+  return axios.post('/cho-o', data);
 }
 
 
