@@ -14,7 +14,11 @@ const postUpdateAccommodation = (p) => {
 }
 
 const createAccomadation = (data) => {
-  
-  return axios.post('cho-o', data);
+
+  return axios.post('/cho-o', data, {
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  });
 }
 export { getExampleService, getAllAccommodation ,postUpdateAccommodation, createAccomadation};
