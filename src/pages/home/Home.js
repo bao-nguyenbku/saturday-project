@@ -15,7 +15,7 @@ const Home = () => {
           className="!ml-auto mr-0 !h-[56px]"
           onClick={() => navigate("/create")}
         >
-          <AddIcon /> Add new
+          <AddIcon /> Thêm nhà trọ mới
         </Button>
       </div>
       <div className="flex items-center w-full justify-center">
