@@ -1,44 +1,96 @@
 import React, { useState, useEffect } from "react";
+import Swal from "sweetalert2";
 import axios from "axios";
 import { createAccomadation } from "../services/accommodation";
+import { useNavigate } from "react-router-dom";
 
 function FormCreate() {
   const [houseName, setHouseName] = useState("");
   const [owner, setOwner] = useState("");
   const [phone, setPhone] = useState("");
-  const [selectedDistrict, setSelectedDistrict] = useState("quận 1");
+  let selectedDistrict = "Thành Phố Thủ Đức";
   const [houseNumber, setHouseNumber] = useState("");
   const [street, setStreet] = useState("");
-  const [area, setArea] = useState("");
-  const [price, setPrice] = useState("");
-  const [description, setDescription] = useState("");
-  const [picture, setPicture] = useState(null);
+  const [area, setArea] = useState(0);
+  const [price, setPrice] = useState(0);
+  // const [description, setDescription] = useState("");
+  const [picture, setPicture] = useState("");
 
   const [districts, setDistricts] = useState([]);
+  const navigate = useNavigate();
+
 
   const handleSubmit = async (e) => {
-    const data = {
-      tên: houseName,
-      soNha: houseNumber,
-      tenDuong: street,
-      quan: selectedDistrict,
-      dienTich: area,
-      gia: price,
-      moTa: description,
-      hinhAnh: picture,
-      chuNha: {
-        ten: owner,
-        soDienThoai: phone,
+    // console.log(typeof houseName)
+    // console.log(typeof houseNumber)
+    // console.log(typeof street)
+    // console.log(typeof selectedDistrict)
+    // console.log(parseInt(area))
+    // console.log(typeof area)
+    // console.log(parseInt(price))
+    // console.log(typeof price)
+    // console.log(typeof picture)
+    // console.log(typeof owner)
+    // console.log(typeof phone)
+    var data = JSON.stringify({
+      "ten": houseName,
+      "soNha": houseNumber,
+      "tenDuong": street,
+      "quan": selectedDistrict,
+      "dienTich": parseInt(area),
+      "gia": parseInt(area),
+      "hinhAnh": picture,
+      "chuNha": {
+        "ten": owner,
+        "soDienThoai": phone,
       },
-    };
-    await createAccomadation(data);
+    });
+    createAccomadation(data)
+      .then((res) => {
+        Swal.fire({
+          title: "Tạo thành công",
+          icon: "success",
+          confirmButtonText: "OK",
+        })
+        console.log(res);
+      })
+      .catch((err) => {
+        Swal.fire({
+          title: "Tạo thất bại",
+          icon: "error",
+          confirmButtonText: "Close",
+        });
+        console.log(err)
+      });
   };
+
+  useEffect(() => {
+    const getDistrict = () => {
+      axios
+        .get(
+          `https://online-gateway.ghn.vn/shiip/public-api/master-data/district`,
+          {
+            headers: {
+              token: "c6109bdb-6597-11ed-9dc6-f64f768dbc22",
+            },
+            params: {
+              province_id: 202,
+            },
+          }
+        )
+        .then((res) => {
+          setDistricts(res.data.data);
+        });
+    };
+
+    getDistrict();
+  }, []);
 
   return (
     <div className="form">
       <div className="md:grid md:grid-cols-3 md:gap-6">
         <div className="mt-5 md:mt-0 md:col-span-2">
-          <form action="#" id="create" onSubmit={handleSubmit}>
+          <form id="create">
             <div className="shadow sm:rounded-md sm:overflow-hidden">
               <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
                 <div className="grid grid-cols-6 gap-6">
@@ -104,15 +156,19 @@ function FormCreate() {
                       id="district"
                       name="district"
                       className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                      onSelect={(e) => {
-                        setSelectedDistrict(e.target.value);
-                        console.log("quận: ", e.target.value);
+                      onChange={(e) => {
+                        selectedDistrict = e.target.value;
+                        console.log(selectedDistrict);
                       }}
-                      defaultValue="quận 1"
                       required
                     >
-                      <option value="quận 1">Quận 1</option>
-                      <option value="quận 2">Quận 2</option>
+                      {districts.map((district, index) => {
+                        return (
+                          <option key={index} value={district.DistrictName}>
+                            {district.DistrictName}
+                          </option>
+                        );
+                      })}
                     </select>
                   </div>
 
@@ -128,7 +184,7 @@ function FormCreate() {
                       name="first_name"
                       id="first_name"
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                      onChange={(e) => setHouseNumber(e.target.value)}
+                      onSelect={(e) => setHouseNumber(e.target.value)}
                       required
                     />
                   </div>
@@ -145,7 +201,7 @@ function FormCreate() {
                       name="street_address"
                       id="street_address"
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                      onSelect={(e) => setStreet(e.target.value)}
+                      onChange={(e) => setStreet(e.target.value)}
                       required
                     />
                   </div>
@@ -161,17 +217,17 @@ function FormCreate() {
                       type="text"
                       name="area"
                       id="area"
-                      class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       placeholder="20m2"
                       onChange={(e) => setArea(e.target.value)}
                       required
                     />
                   </div>
 
-                  <div class="col-span-6 sm:col-span-4">
+                  <div className="col-span-6 sm:col-span-4">
                     <label
                       for="email_address"
-                      class="block text-sm font-medium text-gray-700"
+                      className="block text-sm font-medium text-gray-700"
                     >
                       Giá
                     </label>
@@ -188,28 +244,6 @@ function FormCreate() {
                 </div>
 
                 <div>
-                  <label
-                    for="about"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Mô tả
-                  </label>
-                  <div className="mt-1">
-                    <textarea
-                      id="about"
-                      name="about"
-                      rows="3"
-                      className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md"
-                      placeholder="you@example.com"
-                      onChange={(e) => setDescription(e.target.value)}
-                    ></textarea>
-                  </div>
-                  <p className="mt-2 text-sm text-gray-500">
-                    Brief description for your profile. URLs are hyperlinked.
-                  </p>
-                </div>
-
-                <div>
                   <label className="block text-sm font-medium text-gray-700">
                     Ảnh Trọ
                   </label>
@@ -220,12 +254,14 @@ function FormCreate() {
                     placeholder="https://example.com"
                     pattern="https://.*"
                     size="30"
+                    onChange={(e) => setPicture(e.target.value)}
                   />
                 </div>
               </div>
               <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
                 <button
-                  type="submit"
+                  type="button"
+                  onClick={handleSubmit}
                   className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
                   Tạo

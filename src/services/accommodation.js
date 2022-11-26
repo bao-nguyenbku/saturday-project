@@ -14,7 +14,14 @@ const postUpdateAccommodation = (p) => {
 }
 
 const createAccomadation = (data) => {
-  console.log(data)
-  return axios.post('/cho-o/create', data);
+  const config = {
+    method: 'post',
+    url: 'https://cnpm-nang-cao-app.herokuapp.com/cho-o',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: data
+  }
+  return axios(config);
 }
 export { getExampleService, getAllAccommodation ,postUpdateAccommodation, createAccomadation};
