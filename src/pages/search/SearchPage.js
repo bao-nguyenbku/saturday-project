@@ -10,7 +10,6 @@ import { getAllAccommodation } from "../../services/accommodation";
 const SearchPage = () => {
   const [searchResult, setSearchResult] = useState([]);
   const [searchCriteria, setSearchCriteria] = useState({});
-  // const { data, error } = useSWR("", fetcher);
   const [data, setData] = useState([]);
 
   function removeAccents(str) {
@@ -48,7 +47,6 @@ const SearchPage = () => {
             if (val === -1) return false;
           }
         } else {
-          // console.log(value);
           if (value) {
             let comp;
             let val;
@@ -63,7 +61,6 @@ const SearchPage = () => {
       return true;
     });
 
-    // console.log(res);
     return res;
   };
 
@@ -107,7 +104,6 @@ const SearchPage = () => {
         range.from = temp;
       }
     }
-    // console.log(range);
     setSearchCriteria((prev) => {
       return { ...prev, [field]: range };
     });
@@ -236,7 +232,6 @@ const SearchPage = () => {
         {searchResult.map((entry, index) => (
           <div key={index}>
             <AccommodationCard data={entry} />
-            {/* {console.log(entry)} */}
           </div>
         ))}
       </div>
