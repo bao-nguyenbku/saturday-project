@@ -1,6 +1,6 @@
 import React from "react";
 import AccommodationGridView from "../../components/AccommodationGridView";
-import SearchPage from '../../pages/search/SearchPage';
+import SearchPage from '../search/SearchPage';
 import { Button } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 const Home = () => {
