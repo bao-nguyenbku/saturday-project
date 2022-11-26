@@ -4,7 +4,11 @@ import Detail from "../../components/Detail";
 
 const DetailPage = () => {
   const params = useParams();
-    return <Detail id={params.id}/>;
+  return (
+    <Detail 
+      id={params.id}
+    />
+  )
 }
 
 export default DetailPage;

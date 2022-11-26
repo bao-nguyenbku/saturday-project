@@ -20,7 +20,7 @@ const mockData = {
 };
 
 function Detail(props) {
-    let [accommodationData, setAccommodationData] = useState({});
+    let [accommodationData, setAccommodationData] = useState();
 
     useEffect(() => {
       getAccommodation(props.id).then(response => setAccommodationData(response.data));
@@ -30,13 +30,13 @@ function Detail(props) {
         return (
             <div className="grid h-screen place-items-center">
                 <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-                    <img className="rounded-t-lg" src={mockData.hinhAnh} alt="" />
+                    <img className="rounded-t-lg" src={accommodationData.hinhAnh} alt="" />
                     <div className="p-5">
-                        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{mockData.ten}</h5>
-                        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Địa chỉ: {mockData.soNha}, {mockData.tenDuong}, {mockData.quan}</p>
-                        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Giá: {mockData.gia} đ/tháng</p>
-                        <h6 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{mockData.moTa}</h6>
-                        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Liên hệ : {mockData.chuNha.ten} - {mockData.chuNha.soDienThoai} </p>
+                        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{accommodationData.ten}</h5>
+                        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Địa chỉ: {accommodationData.soNha}, {accommodationData.tenDuong}, {accommodationData.quan}</p>
+                        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Giá: {accommodationData.gia} đ/tháng</p>
+                        <h6 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{accommodationData.moTa}</h6>
+                        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Liên hệ : {accommodationData.chuNha.ten} - {accommodationData.chuNha.soDienThoai} </p>
                     </div>
                 </div>
             </div>

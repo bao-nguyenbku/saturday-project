@@ -8,8 +8,8 @@ const getAllAccommodation = () =>{
   return axios.get('/cho-o/get-all');
 }
 
-const getAccommodation = () =>{
-  return axios.get('/cho-o/id');
+const getAccommodation = (id) =>{
+  return axios.get(`/cho-o/${id}`);
 }
 
 const postUpdateAccommodation = (p) => {
