@@ -1,157 +1,115 @@
 import React, { useState } from "react";
 import AccommodationCard from "../../components/AccommodationCard";
-import { Button, TextField } from "@mui/material";
+import { Button, InputLabel, TextField } from "@mui/material";
 import { FaSearch } from "react-icons/fa";
+import { getAllAccommodation } from "../../services/accommodation";
+// import useSWR from "swr";
 
-const mockData = [
-  {
-    id: 1,
-    ten: "Hello World",
-    soNha: "113/5",
-    tenDuong: "Ba Thang Hai",
-    quan: "Tân Bình",
-    chuNhaId: 1,
-    dienTich: 123,
-    hinhAnh: "img",
-    chuNha: {
-      id: 1,
-      ten: "Nguyễn Thiên Bảo",
-      soDienThoai: "0909090909",
-    },
-  },
-  {
-    id: 1,
-    ten: "Hello World",
-    soNha: "113/5",
-    tenDuong: "Ba Thang Hai",
-    quan: "Tan Binh",
-    chuNhaId: 1,
-    dienTich: 123,
-    hinhAnh: "img",
-    chuNha: {
-      id: 1,
-      ten: "Nguyễn Thiên Bảo",
-      soDienThoai: "0909090909",
-    },
-  },
-  {
-    id: 1,
-    ten: "Hello World",
-    soNha: "113/5",
-    tenDuong: "Ba Thang Hai",
-    quan: "Tan Binh",
-    chuNhaId: 1,
-    dienTich: 123,
-    hinhAnh: "img",
-    chuNha: {
-      id: 1,
-      ten: "Nguyễn Thiên Bảo",
-      soDienThoai: "0909090909",
-    },
-  },
-  {
-    id: 1,
-    ten: "Hello World",
-    soNha: "113/5",
-    tenDuong: "Ba Thang Hai",
-    quan: "Tan Binh",
-    chuNhaId: 1,
-    dienTich: 123,
-    hinhAnh: "img",
-    chuNha: {
-      id: 1,
-      ten: "Nguyễn Thiên Bảo",
-      soDienThoai: "0909090909",
-    },
-  },
-  {
-    id: 2,
-    ten: "Hello World",
-    soNha: "113/5",
-    tenDuong: "Ba Thang Hai",
-    quan: "11",
-    chuNhaId: 1,
-    dienTich: 123,
-    hinhAnh: "img",
-    chuNha: {
-      id: 1,
-      ten: "Nguyễn Thiên Bảo",
-      soDienThoai: "0909090909",
-    },
-  },
-  {
-    id: 3,
-    ten: "Hello World",
-    soNha: "113/5",
-    tenDuong: "Ba Thang Hai",
-    quan: "9",
-    chuNhaId: 1,
-    dienTich: 123,
-    hinhAnh: "img",
-    chuNha: {
-      id: 1,
-      ten: "Nguyễn Thiên Bảo",
-      soDienThoai: "0909090909",
-    },
-  },
-];
+// const fetcher = (args) => getAllAccommodation().then((res) => res.json());
 
 const SearchPage = () => {
   const [searchResult, setSearchResult] = useState([]);
   const [searchCriteria, setSearchCriteria] = useState({});
+  // const { data, error } = useSWR("", fetcher);
+  const [data, setData] = useState([]);
 
   function removeAccents(str) {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   }
 
-  const matchSearch = (criteria, data, param) => {
-    let res;
-    for (const [param, value] of Object.entries(criteria)) {
-      let valueArray = value
-        .split(" ")
-        .map((entry) => removeAccents(entry.trim()));
-      valueArray = valueArray.filter((entry) => entry);
-      // console.log(valueArray);
-      if (valueArray.length > 0) {
-        const regExp = new RegExp(valueArray.join(" "), "i");
-        // console.log(regExp);
-        res = data.filter((entry) => {
-          let comp;
-          let val;
-          // console.log(param === "chuNha");
-          if (param === "chuNha") {
-            comp = removeAccents(entry.chuNha.ten);
-            val = comp.search(regExp);
-          } else {
-            if (typeof entry[param] === "string") {
-              comp = removeAccents(entry[param]);
+  const matchSearch = (criteria, data) => {
+    let res = data.filter((entry) => {
+      for (const [param, value] of Object.entries(criteria)) {
+        // console.log(`[${param}]: ${value}`);
+
+        if (typeof value !== "object") {
+          let valueArray = value
+            .split(" ")
+            .map((entry) => removeAccents(entry.trim()));
+          valueArray = valueArray.filter((entry) => entry);
+
+          if (valueArray.length > 0) {
+            const regExp = new RegExp(valueArray.join(" "), "i");
+            let comp;
+            let val;
+            if (param === "chuNha") {
+              comp = removeAccents(entry.chuNha.ten);
               val = comp.search(regExp);
             } else {
-              comp = entry[param];
-              val = comp.toString() === criteria ? 1 : -1;
+              if (typeof entry[param] === "string") {
+                comp = removeAccents(entry[param]);
+                val = comp.search(regExp);
+              } else if (typeof entry[param] === "number") {
+                comp = entry[param];
+                val = value.from <= comp <= value.to ? 1 : -1;
+              }
             }
-          }
 
-          // console.log(val);
-          return val !== -1;
-        });
-      } else {
-        res = [];
+            if (val === -1) return false;
+          }
+        } else {
+          // console.log(value);
+          if (value) {
+            let comp;
+            let val;
+            comp = entry[param];
+            if (comp < value.from || comp > value.to) val = -1;
+            else val = 1;
+            // console.log(val);
+            if (val === -1) return false;
+          }
+        }
       }
-      console.log(res);
-    }
-    console.log(res);
+      return true;
+    });
+
+    // console.log(res);
     return res;
   };
 
-  const handleSearch = () => {
-    // let res = matchSearch(value, mockData, topic);
-    // setSearchResult(res);
+  const handleSearch = async () => {
+    // if (!data) return;
+    try {
+      let temp = [];
+      await getAllAccommodation().then((res) => {
+        setData(res.data);
+        temp = res.data;
+      });
+      let res = matchSearch(searchCriteria, temp);
+      setSearchResult(res);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const onChangeSearchValue = (event, field) => {
     setSearchCriteria((prev) => {
       return { ...prev, [field]: event.target.value };
+    });
+  };
+
+  const onChangeSearchRange = (event, field, isTo) => {
+    const range = searchCriteria[field] || {};
+
+    if (!isTo) {
+      range.from = Number(event.target.value);
+      if (range.to) {
+        range.to = Math.max(range.to, range.from);
+      } else {
+        range.to = range.from;
+      }
+    } else {
+      const temp = Number(event.target.value);
+      if (range.from) {
+        range.to = Math.max(range.from, temp);
+      } else {
+        range.to = temp;
+        range.from = temp;
+      }
+    }
+    // console.log(range);
+    setSearchCriteria((prev) => {
+      return { ...prev, [field]: range };
     });
   };
   return (
@@ -164,7 +122,7 @@ const SearchPage = () => {
             label="Tên nhà trọ"
             variant="outlined"
             className="bg-slate-100 rounded-lg"
-            value={searchCriteria.ten}
+            value={searchCriteria.ten || ""}
             onChange={(event) => onChangeSearchValue(event, "ten")}
           />
         </div>
@@ -172,10 +130,10 @@ const SearchPage = () => {
           <TextField
             fullWidth
             id="filled-basic"
-            label="Tên nhà trọ"
+            label="Số nhà"
             variant="outlined"
             className="bg-slate-100 rounded-lg"
-            value={searchCriteria.soNha}
+            value={searchCriteria.soNha || ""}
             onChange={(event) => onChangeSearchValue(event, "soNha")}
           />
         </div>
@@ -186,7 +144,7 @@ const SearchPage = () => {
             label="Tên đường"
             variant="outlined"
             className="bg-slate-100 rounded-lg"
-            value={searchCriteria.tenDuong}
+            value={searchCriteria.tenDuong || ""}
             onChange={(event) => onChangeSearchValue(event, "tenDuong")}
           />
         </div>
@@ -197,31 +155,61 @@ const SearchPage = () => {
             label="Quận"
             variant="outlined"
             className="bg-slate-100 rounded-lg"
-            value={searchCriteria.tenDuong}
+            value={searchCriteria.quan || ""}
             onChange={(event) => onChangeSearchValue(event, "quan")}
           />
         </div>
-        <div className={`flex gap-2 col-span-3`}>
-          <TextField
-            fullWidth
-            id="filled-basic"
-            label="Diện tích"
-            variant="outlined"
-            className="bg-slate-100 rounded-lg"
-            value={searchCriteria.tenDuong}
-            onChange={(event) => onChangeSearchValue(event, "dienTich")}
-          />
+        <div className={`flex flex-col gap-2 col-span-3`}>
+          <InputLabel className="text-center">Diện tích</InputLabel>
+          <div className="flex gap-2 ">
+            <TextField
+              fullWidth
+              id="filled-basic"
+              label="Từ"
+              type="number"
+              variant="outlined"
+              className="bg-slate-100 rounded-lg"
+              value={searchCriteria.dienTich?.from || ""}
+              onChange={(event) =>
+                onChangeSearchRange(event, "dienTich", false)
+              }
+            />
+            <TextField
+              fullWidth
+              id="filled-basic"
+              label="Đến"
+              type="number"
+              variant="outlined"
+              className="bg-slate-100 rounded-lg"
+              value={searchCriteria.dienTich?.to || ""}
+              onChange={(event) => onChangeSearchRange(event, "dienTich", true)}
+            />
+          </div>
         </div>
-        <div className={`flex gap-2 col-span-3`}>
-          <TextField
-            fullWidth
-            id="filled-basic"
-            label="Giá"
-            variant="outlined"
-            className="bg-slate-100 rounded-lg"
-            value={searchCriteria.tenDuong}
-            onChange={(event) => onChangeSearchValue(event, "gia")}
-          />
+        <div className={`flex flex-col gap-2 col-span-3`}>
+          <InputLabel className="text-center">Giá</InputLabel>
+          <div className="flex gap-2 ">
+            <TextField
+              fullWidth
+              id="filled-basic"
+              label="Từ"
+              type="number"
+              variant="outlined"
+              className="bg-slate-100 rounded-lg"
+              value={searchCriteria.gia?.from || ""}
+              onChange={(event) => onChangeSearchRange(event, "gia", false)}
+            />
+            <TextField
+              fullWidth
+              id="filled-basic"
+              label="Đến"
+              type="number"
+              variant="outlined"
+              className="bg-slate-100 rounded-lg"
+              value={searchCriteria.gia?.to || ""}
+              onChange={(event) => onChangeSearchRange(event, "gia", true)}
+            />
+          </div>
         </div>
         <div className={`flex gap-2 col-span-3`}>
           <TextField
@@ -230,7 +218,7 @@ const SearchPage = () => {
             label="Tên chủ nhà"
             variant="outlined"
             className="bg-slate-100 rounded-lg"
-            value={searchCriteria.tenDuong}
+            value={searchCriteria.chuNha || ""}
             onChange={(event) => onChangeSearchValue(event, "chuNha")}
           />
         </div>
@@ -244,7 +232,7 @@ const SearchPage = () => {
           <FaSearch size={40} />
         </Button>
       </div>
-      <div>
+      <div className="grid grid-cols-4 mt-9 gap-[20px]">
         {searchResult.map((entry, index) => (
           <div key={index}>
             <AccommodationCard data={entry} />
