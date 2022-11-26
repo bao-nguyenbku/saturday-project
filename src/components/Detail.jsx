@@ -3,24 +3,6 @@ import { getAccommodation } from "../services/accommodation";
 import { formatCurrency } from '../utils/utils';
 
 
-const mockData = {
-    id: 1,
-    ten: 'Nhà trọ số 1',
-    soNha: '12345/6789',
-    tenDuong: 'ABC',
-    quan: 'XYZ',
-    moTa: 'Đỉnh đỉnh đỉnh đỉnh đỉnh đỉnh đỉnh',
-    gia: 123456789,
-    chuNhaId: 1,
-    dienTich: 50000,
-    hinhAnh: 'https://akisa.vn/uploads/plugin/product_items/13551/mau-biet-thu-nha-dep-2-tang-hien-dai-bt21377-v2.jpg',
-    chuNha: {
-        id: 1,
-        ten: 'ABCXYZ',
-        soDienThoai: '0123456789'
-    }
-};
-
 function Detail(props) {
     let [accommodationData, setAccommodationData] = useState();
 
