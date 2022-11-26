@@ -91,7 +91,7 @@ export default function AccommodationCard(props) {
           </span>
         </div>
       </div>
-      <div className="p-3 flex flex-col gap-3">
+      <div className="p-3 flex flex-col gap-3 flex-1 h-[calc(100%-200px)]">
         <p className="text-3xl font-bold">{data.ten}</p>
         <span className="flex items-center text-xl text-gray-500">
           <IoLocation />
@@ -104,7 +104,7 @@ export default function AccommodationCard(props) {
           onClick={() => {
             navigate(`/${data.id}/detail`);
           }}
-          className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-gray-600 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          className="mt-auto mb-0 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-gray-600 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
           Xem chi tiết
           <svg
